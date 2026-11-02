@@ -43,7 +43,7 @@
 // See comments below for metadata fields and switches
 
 // ╭─────────────────────────────────────────────────────────╮
-// │    1. Geometric variables according to NS4129           │
+// │            1. Geometric variables and colors            │
 // ╰─────────────────────────────────────────────────────────╯
 
 #let ghs = 4.233mm                  // grunnhøydesteg: 1/6", single line
@@ -52,9 +52,18 @@
 #let L(n) = n * ghs                 // baseline of line n
 #let T(n) = 21.27mm + n * 22.86mm   // tabulatorposisjon (T-posisjon) n
 #let K(n) = 20mm + n * 22.86mm      // kolonnelinje (K-linje) n, 9/10" apart
-#let info-right = K(8)              // right edge of the information area
 
 #let kvartfet = 0.2mm               // standard line weight
+
+#let colors = ( green: rgb("#009639"), brown: rgb("#B86125"), blue: rgb("#005EB8"), dark-grey: rgb("#717C7D"), black: black, red: rgb("#E4002B"), )
+
+/// Coloured text from the palette
+///   #colored("green")[Some text]
+#let colored(name, body) = {
+  assert(name in colors, message: "colored: unknown colour '" + name + "', expected one of "
+    + colors.keys().map(k => "'" + k + "'").join(", "))
+  text(fill: colors.at(name), body)
+}
 
 // ╭─────────────────────────────────────────────────────────╮
 // │                 2. Placement helpers                    │
@@ -94,7 +103,7 @@
   // ── Sender field (utgiverfelt) ──────────────────────────────────────
   // Use _either_ company or person
   company: none,        // (name: "", department: "", handler: "")
-  person: (name: "H.E. Pennypacker"),         //  (name: "", address: "")
+  person: (name: "H.E. Pennypacker"),         //  (name: "", address_title: "")
   logo: none,           // image file
 
   // ── Sender's full address details (page 1 footer) ───────────────────
@@ -161,9 +170,9 @@
     sender-department = company.at("department", default: none)
     handler = company.at("handler", default: none)
   } else {
-    check-keys(person, "person", ("name", "address"))
+    check-keys(person, "person", ("name", "address_title"))
     sender-name = person.at("name")
-    sender-department = person.at("address", default: none)
+    sender-department = person.at("address_title", default: none)
   }
 
   // ╭─────────────────────────────────────────────────────────╮
@@ -177,8 +186,6 @@
     assert(k in translations.at(translations.default),
       message: "letter: unknown label `" + k + "`")
     }
-  /// Lead text format (e.g. "Vår referanse", "Your date")
-  let lead(it) = text(font: lead-font, size: 6.5pt, it)
   /// Right margin standard (7mm) or 210mm-K(8) if even margins
   let rmargin = if even-margins { T(0) } else { 210mm - K(8) }
   /// Page numbering "n av max(n)", language-dependent
@@ -190,6 +197,9 @@
   // ╭─────────────────────────────────────────────────────────╮
   // │                    3.3 Fixed fields                     │
   // ╰─────────────────────────────────────────────────────────╯
+
+  /// Lead text format (e.g. "Vår referanse", "Your date")
+  let lead(it) = text(font: lead-font, size: 6.5pt, it)
 
   /// Fields function to set up metadata fields, horizontal shifts,
   /// logo placement, folding marks, horizontal rules
@@ -216,14 +226,24 @@
       name-shift = calc.max(0mm, x + measure(logo-box).width + 3mm - T(0))
     }
 
-    // ── Sender name field ────────────────────────────────────────────────
-    let at-name = at.with(shift: shift + name-shift)
-    at-name(0, 4, text(size: 14pt, sender-name))
-    if sender-department != none { at-name(0, 5, text(size: 9.5pt, sender-department)) }
+    // ── Company sender names ────────────────────────────────────────────
+    if company != none {
+      let at-name = at.with(shift: shift + name-shift)
+      at-name(0, 4, text(size: 14pt, sender-name))
+      if sender-department != none { at-name(0, 5, text(size: 9.5pt, sender-department)) }
+      if first and handler != none {
+        at(0, 7, lead(t.handler))
+        at(0, 8, handler)
+      }
+    }
 
-    if first and handler != none {
-      at(0, 7, lead(t.handler))
-      at(0, 8, handler)
+    // ── Person sender name ──────────────────────────────────────────────
+    if person != none {
+      let at-name = at.with(shift: shift + name-shift)
+      at-name(0, 5, text(size: 14pt, sender-name))
+      if sender-department != none {
+        at-name(0, 6, text(size: 9.5pt, sender-department))
+      }
     }
 
     // ── Sender reference and document type/marking fields ───────────────
@@ -231,7 +251,7 @@
     if doc-type != none { at(4, 4, text(size: 13pt, weight: "bold", doc-type)) }
     if doc-type-code != none { at(6, 4, doc-type-code) }
     at(7, 4, pageno)
-    at(4, 5, lead(t.our-date)); at(4, 6, date)
+    if company != none { at(4, 5, lead(t.our-date)) }; at(4, 6, date)
     if our-ref != none { at(6, 5, lead(t.our-ref)); at(6, 6, our-ref) }
 
     // ── METADATA FOR FIRST PAGE ONLY ────────────────────────────────────

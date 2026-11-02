@@ -50,11 +50,12 @@
 
   // ── Sender's full contact details for footer ────────────────────────
   footer: (
-    ("Postadresse", [Inkognitagata 99 \ 0123 OSLO]),
-    ("Telefon",     "911 91 911"),
-    ("E-post",      [#link("mailto:art@vandelay.biz")[art\@vandelay.biz] \
+    ("Address", [Inkognitagata 99 \ 0123 OSLO]),
+    ("Telephone",     "+47 911 91 911"),
+    ("E-mail",      [#link("mailto:art@vandelay.biz")[art\@vandelay.biz] \
                      #link("mailto:lawsuits@vandelay.biz")[lawsuits\@vandelay.biz]]),
-    ("Telex",       "41554"),
+    ("X.400",       [G=Bob;S=Sacamano;O=Vandelay; \
+                    PRMD=VCorp;A=ATT;C=US]),
   ),
 
   // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓

@@ -1,4 +1,4 @@
-#import "@local/nor-letter:0.2.0": letter, indented, signature
+#import "@local/nor-letter:0.2.0": letter, indented, signature, colors
 
 #show: letter.with(
   // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -36,7 +36,7 @@
   // Name and logo fields for header. Must have _either_ company or person fields.
   // Complete address and other relevant details go in footer.
   // company: (name: "", department: "", handler: "")
-  // person: (name: "", address: "")
+  // person: (name: "", address_title: "")
   company: (
     name: "Vandelay Industries",
     department: "Exports department",
