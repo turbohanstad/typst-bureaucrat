@@ -19,7 +19,7 @@ The template is reasonably heavy on code and named fields, to ensure uniform out
 
 ## Examples
 - [Business-to-business letter in English](examples/b2b-english.pdf) showing use of references, bullet point style and indented paragraph style 
-- [Similar letter in Norwegian Nynorsk](examples/b2b-nynorsk.pdf)
+- [Similar letter in Norwegian Nynorsk](examples/b2b-nynorsk.pdf), showing more complex sender details in footer
 - [Person-to-business letter in English](examples/personal-english.pdf) showing a multi-page document with simpler layout and less metadata
 - [Similar letter in Norwegian Bokmål](examples/personal-bokmal.pdf), with "even-margins: false" and "two-sided: true".
 
@@ -31,16 +31,15 @@ A simple example showing usage of the most common metadata fields:
 
 #show: letter.with(
   // ── DOCUMENT DATA ───────────────────────────────────────────────────
-  subject:        "Very important and profound message",
-  doc-type:       none,
-    doc-type-code:  none,
-    marking:        Draft,
+  subject:        "Very important message",
+  doc-type:       none,         doc-type-code:  none,
+  marking:        Draft,
 
   date:       "2026-10-10",
   our-ref:    "26-1200/23",       revision: none,
   your-date:  2026-10-01,       your-ref:   "2026/1234-1",
 
-  language: "en",  // en,nb,nn or custom in labels.toml
+  language: "en",
 
   // ── RECIPIENT ───────────────────────────────────────────────────────
   recipient-lead: "Electronic distribution",
@@ -60,7 +59,7 @@ A simple example showing usage of the most common metadata fields:
   company: (
     name: "Vandelay Industries",
     department: "Exports department",
-    handler: "A. Vandelay"
+    handler: "Babs K."
   ),
   person: none,
 
@@ -70,7 +69,7 @@ A simple example showing usage of the most common metadata fields:
   // ((label, content), (..)) OR [*label* \ content \ *l* \ c],[...]
   footer: (
     ("Postal address", [Street \ Town]),
-    ("Phone number",     "+47 123 45 678"),
+    ("Phone number",     "+1 123 45 678"),
     ("E-mail",      [#link("mailto:art@vandelay.biz")[art\@vandelay.biz]]),
   ),
   footer-tabs: (0, 2, 4, 6), // edit to fit more columns
@@ -81,15 +80,15 @@ A simple example showing usage of the most common metadata fields:
 )
 
 // ── BODY TEXT ───────────────────────────────────────────────────────
-// use #indented[content] for indented paragraphs
 
-The body text of our very important and thought-trough message follows here. Some of our thoughts are so profound that we use #text(color: colors.red)[template-defined colors] for emphasis.
+The body text of our very important and and well-considered letter goes here. Some things are so important that we use #text(fill: colors.red)[*template-defined colors*] for emphasis.
 
-#indented[We sometimes use indented paragraphs for even more profound remarks to our well-]
+#indented[Or even an indentet paragraph for remarks or quotes!]
 
 Yours,
 
 #signature()[Art Vandelay \ Architect][Babs K. \ Attendant]
 ```
+
 ## Development
 Any comments or contributions are welcome, see https://github.com/turbohanstad/typst-nor-letter . 
