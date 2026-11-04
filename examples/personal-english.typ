@@ -51,7 +51,7 @@ address_title: "Industrialist/philantropist/bicyclist"),
   footer: (
     ("Address", [129 W. 81st Street \ 10024 New York \ U.S.A]),
     ("Telephone",     "+47 123 45 678"),
-    ("E-mail",      [#link("mailto:donotreply@vandelay.biz")[art\@vandelay.biz]]),
+    ("E-mail",      [#link("mailto:donotreply@packer.biz")[hep\@packer.biz]]),
   ),
   footer-tabs: (0, 2, 4, 6),
 
@@ -98,4 +98,4 @@ address_title: "Industrialist/philantropist/bicyclist"),
 
 Yours,
 
-#signature()[Art Vandelay \ Architect]
+#signature()[H.E. Pennypacker \ Industrialist, philantropist, etc.]

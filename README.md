@@ -20,8 +20,8 @@ The template is reasonably heavy on code and named fields, to ensure uniform out
 ## Examples
 - [Business-to-business letter in English](examples/b2b-english.pdf) showing use of references, bullet point style and indented paragraph style 
 - [Similar letter in Norwegian Nynorsk](examples/b2b-nynorsk.pdf)
-- [Person-to-business letter in English](examples/personal-english.pdf) showing simpler layout and less metadata
-- [Similar letter in Norwegian Bokmål](examples/personal-bokmal.pdf), showing a multi-page document with uneven margins, unjustified text and double-sided printing.
+- [Person-to-business letter in English](examples/personal-english.pdf) showing a multi-page document with simpler layout and less metadata
+- [Similar letter in Norwegian Bokmål](examples/personal-bokmal.pdf), with "even-margins: false" and "two-sided: true".
 
 ## Usage
 A simple example showing usage of the most common metadata fields:

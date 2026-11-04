@@ -66,7 +66,7 @@
   folding-marks: false,              // fold marks for E65/DL window envelopes
   two-sided: true,                 // mirror even pages (binding margin on the right)
   even-margins: false,               // body text right margin = left margin
-  justify: false,                    // false: ragged right
+  justify: true,                    // false: ragged right
   rules: true,                      // rules below the header and above the footer
   list-indent: 1,                   // list markers on tab position n
 )
@@ -77,9 +77,9 @@
 
 // use #indented[content] for indented paragraphs
 Side to og påfølgende har en mer kompakt topptekst, kun med nødvendig metadata for å identifisere hvilket dokument det hører til. Bunnteksten med kontaktinformasjon finnes bare på første side. Dette eksemplet har også et litt annet utseende, justert som følger:
-- Even-margins: false
-- Double-sided: true
-- Justify: False
+- even-margins: false
+- two-sided: true
+- justify: False
 
 #lorem(50)
 

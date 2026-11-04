@@ -26,7 +26,7 @@
     Pb. 123 \ 
     4567 BERGEN
   ],
-  right-address: ("Kopi til:", [Jackie Chiles \ Attorney at Law]),
+  right-address: ("Kopi til:", [Jackie Chiles, \ Attorney at Law]),
                         // e.g. ("Kopi", [ABCDpt. \ Pb. 15 DEP])
 
   // ── Label overrides ─────────────────────────────────────────────────

@@ -6,7 +6,9 @@ authors = ["Kristian Hanstad"]
 license = "MIT"
 description = "Create business letters and other documents according to Norwegian Standard 4129:1995. Strict template with correct placing of addresses and plenty of other metadata."
 repository = "https://github.com/turbohanstad/typst-nor-letter"
-keywords = ["office", "layout", "letter", "Norwegian"]
+categories = ["office", "layout"]
+keywords = ["office", "letter", "memo", "Norwegian",]
+exclude = ["examples/"]
 
 [template]
 path = "template"
