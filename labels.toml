@@ -2,6 +2,7 @@ default = "nb"
 
 [nb]
 handler   = "Saksbehandler"
+revision  = "Revisjon"
 our-date  = "Vår dato"
 our-ref   = "Vår ref."
 your-date = "Deres dato"
@@ -15,6 +16,7 @@ your-ref  = "Dykkar ref."
 
 [en]
 handler   = "Case officer"
+revision  = "Revision"
 our-date  = "Our date"
 our-ref   = "Our reference"
 your-date = "Your date"

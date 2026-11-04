@@ -11,34 +11,30 @@
 // or forms. It is primarily designed for professional internal or external communication,
 // but can also be used for personal corresponcence with business or government entities.
 //
-// The strong suits of this norm is that it allows for a complete set of standard
-// metadata like document numbering for both parties, as well as a full set of details
-// for the sender (addresses, company registry details, bank etc) without cluttering the
-// first page.
+// The norm allows for a complete set of standard metadata like document numbering for both
+// parties, as well as a full set of details for the sender (addresses, company registry
+// details, bank etc) without cluttering the first page.
 //
 // Metadata labels sit in a sidecar labels.toml file in Norwegian (bokmål + nynorsk)
 // and English. These and inline labels can be customized in the template in order to,
 // for example, create recognizable meeting minutes by setting "secretary"/"present"/"absent"
-// where "case officer"/"notice"/"copy" would go in a letter.
+// where "case officer"/"recipient lead"/"copy" would go in a letter.
 //
-// The standard defines certain geometry:
-//   line n baseline:  n × 4.233 mm from the top paper edge
-//   T-position (tabulatorposisjon) n:  20 + 1.27 + n × 22.86 mm from the left paper edge
-//   fields: sender on lines 03–08 (T0), references on lines 03–08 (T4/T6/T7),
-//           address lines 10–15 (lines 09 and 16 left empty), body text lines 17–64,
-//           sender's full address details on lines 65–68 on first page
-//           basic header (sender and sender reference) included on all pages
+// The standard is flexible, but for business correspondence it is relatively strict
+// when it comes to placing of metadata on lines and tab-positions as in this template.
 //
 // Address placement fits standard window envelopes with an A4 sheet folded in three.
 //
-// Certain optionals from the standard are included as switches (true/false) in the template.
-// They include:
+// Certain optionals from the standard are included as switches (true/false) in the template:
 // - Even margins: Body text set 21.27mm from both right and left edge
 // - Double-sided: Leaves space for binding/hole-punching even if right margin is narrower,
 //   and avoids text bleeding through the paper unevenly.
 // - Fold marks
 // - Justified or non-justified body text
 // - Inset of bullet points to defined tab-positions
+//
+// Colors from lib.typ can be used in documents by importing "colors" and setting e.g.
+// #text(fill: colors.red)[*WARNING*]
 //
 // See comments below for metadata fields and switches
 
@@ -113,6 +109,7 @@
 
   // ── Reference field (referansefelt) ─────────────────────────────────
   date: datetime.today().display("[year]-[month]-[day]"),
+  revision: none,
   marking: none,        // e.g. "Fortrolig", "Utkast" – l 03, T4, bold
   doc-type: none,       // e.g. "Melding", "Notat" – l 04, T4
   doc-type-code: none,  // e.g. "F-2001" – l 04, T6
@@ -121,17 +118,16 @@
   your-ref: none,
 
   // ── Recipient address field ─────────────────────────────────────────
-  notice: none,             // e.g. [Rekommandert] – bold text above recipient
-  recipient: [],            // max 6 lines including notice
-  right-address: none,      // right address field
-                            // format (label, content)
+  recipient-lead: none,     // e.g. [Rekommandert] – bold text above recipient
+  recipient: [],            // max 6 lines including lead text
+  secondary-address: none,  // right address field (label, content)
                             // e.g. ("Kopi til", [Industridepartementet / P.b. 15 DEP])
 
   // ── Typography ──────────────────────────────────────────────────────
   font: "Libertinus Serif",
   lead-font: ("Liberation Sans", "DejaVu Sans", "Arial"),
   size: 11pt,
-  lang: "nb",
+  language: "nb",
   justify: true,
 
   // ── Layout options ──────────────────────────────────────────────────
@@ -181,7 +177,7 @@
 
   /// Label translations from labels.toml
   let t = translations.at(
-    translations.default) + translations.at(lang, default: (:)) + labels
+    translations.default) + translations.at(language, default: (:)) + labels
   for k in labels.keys() {
     assert(k in translations.at(translations.default),
       message: "letter: unknown label `" + k + "`")
@@ -252,6 +248,7 @@
     if doc-type-code != none { at(6, 4, doc-type-code) }
     at(7, 4, pageno)
     if company != none { at(4, 5, lead(t.our-date)) }; at(4, 6, date)
+    if revision != none { at(5, 5, lead(t.revision)) }; at(5, 6, revision)
     if our-ref != none { at(6, 5, lead(t.our-ref)); at(6, 6, our-ref) }
 
     // ── METADATA FOR FIRST PAGE ONLY ────────────────────────────────────
@@ -261,14 +258,14 @@
       if your-ref != none { at(6, 7, lead(t.your-ref)); at(6, 8, your-ref) }
 
       // ── Recipient address fields ────────────────────────────────────────
-      at(0, 10, { if notice != none { lead(notice) } })
+      at(0, 10, { if recipient-lead != none { lead(recipient-lead) } })
       at(0, 11, { recipient })
       // ── Secondary (right) address field ─────────────────────────────────
-      if right-address != none {
-        let content = if type(right-address) == array {
-          let (label, lines) = right-address
+      if secondary-address != none {
+        let content = if type(secondary-address) == array {
+          let (label, lines) = secondary-address
           lead(label) + linebreak() + lines
-        } else { right-address }
+        } else { secondary-address }
         at(4, 10, content)
       }
 
@@ -324,7 +321,7 @@
   set text(
     font: font,
     size: size,
-    lang: lang,
+    lang: language,
     top-edge: "baseline",
     bottom-edge: "baseline")
   set par(

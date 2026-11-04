@@ -1,79 +1,57 @@
-#import "@local/nor-letter:0.2.0": letter, indented, signature, colors
+#import "@local/nor-letter:0.3.0": letter, indented, signature, colors
 
 #show: letter.with(
-  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-  // ┃                      DOCUMENT DATA                      ┃
-  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-
+  // ── DOCUMENT DATA ───────────────────────────────────────────────────
   subject:        none,
+  doc-type:       none,
+    doc-type-code:  none,
+    marking:        none,
 
-  // Metadata fields mostly for documents that are not letters
-  doc-type:       none,       // document type: minutes, memo etc.
-  doc-type-code:  none,       // if e.g. Memo has a template number
-  marking:        none,       // draft, confidential etc.
+  date:       "2020-01-20",
+  our-ref:    none,       revision: none,
+  your-date:  none,       your-ref:   none,
 
-  lang: "en",  // en/nb/nn - changes label templates, hyphenation etc
+  language: "nb",  // en,nb,nn or custom in labels.toml
 
-  // ── Message references ──────────────────────────────────────────────
-  // date:    "2020-01-20",     // uncomment to override automatic date
-  our-ref:    none,
-  your-date:  none,
-  your-ref:   none,
+  // ── RECIPIENT ───────────────────────────────────────────────────────
+  recipient-lead: none,
+  recipient: [
+    Recip Co
+    123 Post Street
+    Anytown, USA
+  ],
+  secondary-address: none, // (lead, content) e.g. ("CC:", [J. Chiles])
 
-  // ── Recipient ───────────────────────────────────────────────────────
-  notice: none,         // bold line above the address, e.g. "Rek.sending"
-  recipient: none,      // [Varnsen Inc. \ Postboks 123 \ 5000 BERGEN]
-  right-address: none,  // (label, content)
-                        // e.g. ("Kopi", [ABCDpt. \ Pb. 15 DEP])
+  // ── LABEL OVERRIDES ─────────────────────────────────────────────────
+  labels: (:),
 
-  // ── Label overrides ─────────────────────────────────────────────────
-  labels: (:),          // e.g. (handler: "Drafted by",)
-
-  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-  // ┃                         SENDER                          ┃
-  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-
-  // Name and logo fields for header. Must have _either_ company or person fields.
-  // Complete address and other relevant details go in footer.
-  // company: (name: "", department: "", handler: "")
+  // ── SENDER ──────────────────────────────────────────────────────────
+  // company: (name: "", department: "", handler: "") OR
   // person: (name: "", address_title: "")
   company: (
     name: "Vandelay Industries",
     department: "Exports department",
     handler: "A. Vandelay"
   ),
-  // person: none,
   person: none,
 
-  logo: none,     // none, or image("logo.png")
+  logo: none,     // none or e.g. image("logo.png")
 
-  // ── Full contact details, for footer ────────────────────────────────
-  // Pairs of ((label, content)); (("Postadresse", "Jogata 4 \ 5000 Neiby"), ) OR
-  // columns of [*header* \ content \ *header* content],[...] to fit more fields.
-  // By default up to 4 columns. Edit footer-tabs (e.g. 0,2,4,5,6) to fit more.
+  // ── SENDER'S FULL CONTACT DETAILS (FOOTER) ──────────────────────────
+  // ((label, content), (..)) OR [*label* \ content \ *l* \ c],[...]
   footer: (
     ("Postadresse", [Street \ Town]),
     ("Telefon",     "+47 123 45 678"),
     ("E-post",      [#link("mailto:art@vandelay.biz")[art\@vandelay.biz]]),
   ),
-  footer-tabs: (0, 2, 4, 6),
+  footer-tabs: (0, 2, 4, 6), // edit to fit more columns
 
-  // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-  // ┃                     LAYOUT OPTIONS                      ┃
-  // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-
-  folding-marks: true,              // fold marks for E65/DL window envelopes
-  two-sided: false,                 // mirror even pages (binding margin on the right)
-  even-margins: true,               // body text right margin = left margin
-  justify: true,                    // false: ragged right
-  rules: true,                      // rules below the header and above the footer
-  list-indent: 1,                   // list markers on tab position n
+  // ── LAYOUT ──────────────────────────────────────────────────────────
+  folding-marks: true,  two-sided: false, even-margins: true,
+  justify: true,        rules: true,      list-indent: 1,
 )
 
-// ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-// ┃                        BODY TEXT                        ┃
-// ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-
+// ── BODY TEXT ───────────────────────────────────────────────────────
 // use #indented[content] for indented paragraphs
 
 body

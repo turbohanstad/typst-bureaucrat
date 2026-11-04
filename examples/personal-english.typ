@@ -22,7 +22,7 @@
 
   // ── Recipient ───────────────────────────────────────────────────────
   notice: none,         // bold line above the address, e.g. "Rek.sending"
-  recipient: [Varnsen \ P.o.box 1119 \ NY City],      // [Varnsen Inc. \ Postboks 123 \ 5000 BERGEN]
+  recipient: [Ken Varnsen Co. \ PO BOX 1010 \ NEW YORK],      // [Varnsen Inc. \ Postboks 123 \ 5000 BERGEN]
   right-address: none,  // (label, content)
                         // e.g. ("Kopi", [ABCDpt. \ Pb. 15 DEP])
 
