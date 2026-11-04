@@ -18,7 +18,10 @@ The template is reasonably heavy on code and named fields, to ensure uniform out
 * **Complex sender details:** Contact details like addresses, phone numbers, registry numbers and bank details print cleanly in the footer without cluttering the document.
 
 ## Examples
-See https://github.com/turbohanstad/typst-nor-letter/tree/main/examples for more examples of use of the template for business to business or personal correspondence in English or Norwegian.
+- [Business-to-business letter in English](examples/b2b-english.pdf) showing use of references, bullet point style and indented paragraph style 
+- [Similar letter in Norwegian Nynorsk](examples/b2b-nynorsk.pdf)
+- [Person-to-business letter in English](examples/personal-english.pdf) showing simpler layout and less metadata
+- [Similar letter in Norwegian Bokmål](examples/personal-bokmal.pdf), showing a multi-page document with uneven margins, unjustified text and double-sided printing.
 
 ## Usage
 A simple example showing usage of the most common metadata fields:
