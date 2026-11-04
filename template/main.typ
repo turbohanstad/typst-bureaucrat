@@ -3,9 +3,7 @@
 #show: letter.with(
   // ── DOCUMENT DATA ───────────────────────────────────────────────────
   subject:        none,
-  doc-type:       none,
-    doc-type-code:  none,
-    marking:        none,
+  doc-type:       none,   doc-type-code:  none,     marking:        none,
 
   date:       "2020-01-20",
   our-ref:    none,       revision: none,
