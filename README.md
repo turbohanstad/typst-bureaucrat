@@ -20,6 +20,9 @@ The template is reasonably heavy on code and named fields, to ensure uniform out
 ## Examples
 See https://github.com/turbohanstad/typst-nor-letter/tree/main/examples for more examples of use of the template for business to business or personal correspondence in English or Norwegian.
 
+## Usage
+A simple example showing usage of the most common metadata fields:
+
 ```typ
 #import "@preview/nor-letter:0.3.0": letter, indented, signature, colors
 
