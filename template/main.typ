@@ -1,4 +1,4 @@
-#import "@local/nor-letter:0.3.0": letter, indented, signature, colors
+#import "@local/bureaucrat:0.3.0": letter, indented, signature, colors
 
 #show: letter.with(
   // ── DOCUMENT DATA ───────────────────────────────────────────────────
