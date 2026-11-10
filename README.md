@@ -1,4 +1,4 @@
-# typst-bureaucrat
+# Typst-bureaucrat
 A Typst business document/letter template conforming to the NS 4129:1995 standard (Kontordokumenter og blanketter - Utforming). This standard references ISO 6422:1985 (Layout key for trade documents).
 
 ## Purpose
@@ -33,7 +33,7 @@ A simple example showing usage of the most common metadata fields:
   // ── DOCUMENT DATA ───────────────────────────────────────────────────
   subject:        "Very important message",
   doc-type:       none,         doc-type-code:  none,
-  marking:        Draft,
+  marking:        "Draft",
 
   date:       "2026-10-10",
   our-ref:    "26-1200/23",       revision: none,
@@ -44,11 +44,11 @@ A simple example showing usage of the most common metadata fields:
   // ── RECIPIENT ───────────────────────────────────────────────────────
   recipient-lead: "Electronic distribution",
   recipient: [
-    Recip Co
-    123 Post Street
+    Recip Co \
+    123 Post Street \ 
     Anytown, USA
   ],
-  secondary-address: ("Copy:" [J. Chiles \ Attorney at Law]),
+  secondary-address: ("Copy:", [J. Chiles \ Attorney at Law]),
 
   // ── LABEL OVERRIDES ─────────────────────────────────────────────────
   labels: (handler: "Drafted by"),
@@ -88,6 +88,7 @@ The body text of our very important and and well-considered letter goes here. So
 Yours,
 
 #signature()[Art Vandelay \ Architect][Babs K. \ Attendant]
+
 ```
 
 ## Development
